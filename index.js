@@ -219,7 +219,7 @@ Notifications._onNotification = function(data, isFromBackground = null) {
 		if ( Platform.OS === 'ios' ) {
 			this.onNotification({
 				foreground: ! isFromBackground,
-				userInteraction: isFromBackground,
+				userInteraction: data.getUserInteraction(),
 				message: data.getMessage(),
 				data: data.getData(),
 				badge: data.getBadgeCount(),
@@ -231,7 +231,10 @@ Notifications._onNotification = function(data, isFromBackground = null) {
 		} else {
 			var notificationData = {
 				foreground: ! isFromBackground,
-  			finish: () => {},
+				finish: () => {},
+				present: () => {
+					this.localNotification(data);
+				},
 				...data
 			};
 
