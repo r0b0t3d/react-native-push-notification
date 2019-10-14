@@ -42,18 +42,8 @@ public class RNPushNotificationListenerService extends FirebaseMessagingService 
             bundle.putString("color", remoteNotification.getColor());
         }
 
-<<<<<<< HEAD
-        Bundle dataBundle = new Bundle();
-        for(Map.Entry<String, String> entry : message.getData().entrySet()) {
-            dataBundle.putString(entry.getKey(), entry.getValue());
-        }
-        bundle.putParcelable("data", dataBundle);
-
-        JSONObject data = getPushData(bundle.getString("data"));
-=======
         Map<String, String> notificationData = message.getData();
 
->>>>>>> fix/notification
         // Copy `twi_body` to `message` to support Twilio
         if (notificationData.containsKey("twi_body")) {
             bundle.putString("message", notificationData.get("twi_body"));
